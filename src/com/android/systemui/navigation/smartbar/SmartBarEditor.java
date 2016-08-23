@@ -1,7 +1,7 @@
 /**
  * Copyright (C) 2016 The DirtyUnicorns Project
  * Copyright (C) 2015 The CyanogenMod Project
- * 
+ *
  * @author: Randall Rushing <randall.rushing@gmail.com>
  *
  * Contributions from The CyanogenMod Project
@@ -35,7 +35,6 @@ import com.android.internal.utils.du.DUActionUtils;
 import com.android.internal.utils.du.Config;
 import com.android.internal.utils.du.Config.ButtonConfig;
 import com.android.systemui.navigation.BaseEditor;
-import com.android.systemui.navigation.BaseNavigationBar;
 import com.android.systemui.navigation.Res;
 import com.android.systemui.navigation.smartbar.SmartBarEditor;
 import com.android.systemui.navigation.smartbar.SmartBarHelper;
@@ -107,6 +106,7 @@ public class SmartBarEditor extends BaseEditor implements View.OnTouchListener {
     private static final int[] sLocation = new int[2];
 
     private SmartBarView mHost;
+    private boolean mIsTablet;
 
     private FrameLayout mEditContainer;
     private View mHidden;
@@ -222,6 +222,7 @@ public class SmartBarEditor extends BaseEditor implements View.OnTouchListener {
 
     public SmartBarEditor(SmartBarView host) {
         super(host);
+        mIsTablet = !DUActionUtils.isNormalScreen();
         mHost = host;
     }
 
@@ -333,7 +334,7 @@ public class SmartBarEditor extends BaseEditor implements View.OnTouchListener {
     }
 
     private int getMaxButtons() {
-        return BaseNavigationBar.sIsTablet ? TABLET_MAX_BUTTONS : PHONE_MAX_BUTTONS;
+        return mIsTablet ? TABLET_MAX_BUTTONS : PHONE_MAX_BUTTONS;
     }
 
     private boolean getHasMaxButtons() {
@@ -775,7 +776,7 @@ public class SmartBarEditor extends BaseEditor implements View.OnTouchListener {
 
     /**
      * Find intersecting view in mButtonViews
-     * 
+     *
      * @param pos - pointer location
      * @param v - view being dragged
      * @return intersecting view or null
@@ -804,7 +805,7 @@ public class SmartBarEditor extends BaseEditor implements View.OnTouchListener {
 
     /**
      * Switches positions of two views and updates their mButtonViews entry
-     * 
+     *
      * @param targetView - view to be replaced animate out
      * @param view - view being dragged
      */

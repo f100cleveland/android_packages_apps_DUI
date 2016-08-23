@@ -515,7 +515,7 @@ public class SmartBarView extends BaseNavigationBar {
         SmartBarHelper.addLightsOutButton(getContext(), lightsOut, leftContext, landscape, true);
 
         // tablets get a spacer here
-        if (BaseNavigationBar.sIsTablet) {
+        if (mIsTablet) {
             SmartBarHelper.addViewToRoot(navButtonLayout, SmartBarHelper.makeSeparator(getContext()),
                     landscape);
             SmartBarHelper.addLightsOutButton(getContext(), lightsOut,
@@ -540,14 +540,14 @@ public class SmartBarView extends BaseNavigationBar {
 
             // phones get a spacer between each button
             // tablets get a spacer before first and after last
-            if (j != buttonConfigs.size() - 1 && !BaseNavigationBar.sIsTablet) {
+            if (j != buttonConfigs.size() - 1 && !mIsTablet) {
                 // adding spacers between buttons on phones
                 SmartBarHelper.addViewToRoot(navButtonLayout,
                         SmartBarHelper.makeSeparator(getContext()), landscape);
                 SmartBarHelper.addLightsOutButton(getContext(), lightsOut,
                         SmartBarHelper.makeSeparator(getContext()), landscape, true);
             }
-            if (j == buttonConfigs.size() - 1 && BaseNavigationBar.sIsTablet) {
+            if (j == buttonConfigs.size() - 1 && mIsTablet) {
                 // adding spacers after last button on tablets
                 SmartBarHelper.addViewToRoot(navButtonLayout,
                         SmartBarHelper.makeSeparator(getContext()), landscape);
@@ -568,8 +568,8 @@ public class SmartBarView extends BaseNavigationBar {
             int extraKeyWidth, int extraKeyHeight) {
         FrameLayout contextLayout = new FrameLayout(getContext());
         contextLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                landscape && !BaseNavigationBar.sIsTablet ? LayoutParams.MATCH_PARENT
-                        : extraKeyWidth, landscape && !BaseNavigationBar.sIsTablet ? extraKeyHeight
+                landscape && !mIsTablet ? LayoutParams.MATCH_PARENT
+                        : extraKeyWidth, landscape && !mIsTablet ? extraKeyHeight
                         : LayoutParams.MATCH_PARENT));
         contextLayout.setTag(leftOrRight);
 
@@ -602,8 +602,8 @@ public class SmartBarView extends BaseNavigationBar {
         int extraKeyHeight = getContext().getResources().getDimensionPixelSize(R.dimen.navigation_extra_key_height);
 
         v.setLayoutParams(new FrameLayout.LayoutParams(
-                landscape && !BaseNavigationBar.sIsTablet ? LayoutParams.MATCH_PARENT : extraKeyWidth,
-                landscape && !BaseNavigationBar.sIsTablet ? extraKeyHeight : LayoutParams.MATCH_PARENT));
+                landscape && !mIsTablet ? LayoutParams.MATCH_PARENT : extraKeyWidth,
+                landscape && !mIsTablet ? extraKeyHeight : LayoutParams.MATCH_PARENT));
         v.loadRipple();
         v.setScaleType(ScaleType.CENTER_INSIDE);
 
